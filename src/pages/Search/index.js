@@ -1,6 +1,7 @@
 import { Box, Button, Card, CardContent, Container, Grid, Link, Stack, TextField, Typography } from "@mui/material";
 
 const Search = () => {
+    
     return (
         <Container contaner maxWidth="sm">
             <Card sx={{marginTop: 20}}>
@@ -22,12 +23,14 @@ const Search = () => {
                                     fullWidth
                                     label="Movie or tv Show"
                                 />
-                                <Button
-                                    fullWidth
-                                    variant="contained"
-                                >
-                                    Search
-                                </Button>
+                                <Link>
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                    >
+                                        Search
+                                    </Button>
+                                </Link>
                             </Stack>
                         </Box>
                     </Grid>

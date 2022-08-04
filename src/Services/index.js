@@ -4,15 +4,20 @@ import config from "./config.js";
 // crear la funcion searchByText(searchText)
 // dentro harán un fetch, a esta url: 
 // config.apiUrl + "?s=" + searchText + "&apikey=" + config.apiKey
-export const searchByText = async (searchText) => {
+const searchByText = async (searchText) => {
     try {
-        const response = await fetch(
-            `${config.apiUrl}/?=${searchText}&apikey${config.apiKey}`
-        )
+        const url =
+            config.apiUrl + "?s=" + searchText + "&apikey=" + config.apiKey;
+        const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
-        return error;
+        console.log(error);
     }
 };
+
+const Services = {
+    searchByText,
+};
+
+export default Services;
