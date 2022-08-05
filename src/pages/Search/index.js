@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MenuBar } from "../../components";
 import LogoutIcon from '@mui/icons-material/Logout';
-import { AppBar, Box, Button, Card, CardContent, Container, Grid, IconButton, Stack, TextField, Toolbar, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Container, Grid, Stack, TextField, Typography } from "@mui/material";
 
 
 const Search = () => {
@@ -19,23 +20,18 @@ const Search = () => {
         history(`/search/${searchText}`)     
     }
 
+    function hola() {
+		console.log("HOLA");
+	}
+
     return (
         <>
             <Box>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{ flexGrow: 1 }}
-                        >
-                            Edgar Razuri
-                        </Typography>
-                        <IconButton color="secondary"> 
-                            <LogoutIcon/>
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
+                <MenuBar
+                    text={"Edgar"}
+                    buttonClick={hola}
+                    buttonIcon={() => <LogoutIcon />}
+                />
             </Box>
             <Container maxWidth="sm">
                 <Card sx={{marginTop: 20}}>
