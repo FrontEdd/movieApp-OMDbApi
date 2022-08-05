@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { Navigate } from "react-router-dom";
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,14 +15,15 @@ import Container from '@mui/material/Container';
 
 
 export default function SignIn() {
+  const { logIn, isAuth } = useContext(AuthContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    logIn(data.get("user"), data.get("pass"));
   };
+  console.log(isAuth());
+  if (isAuth()) { return <Navigate to="/search" />; }
 
   return (
     <>
@@ -36,24 +41,23 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign In
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="user"
+              label="User"
+              name="user"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="pass"
               label="Password"
               type="password"
               id="password"
@@ -69,7 +73,7 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Login
             </Button>
           </Box>
         </Box>

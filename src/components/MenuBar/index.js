@@ -8,7 +8,6 @@ const MenuBar = ({ text, buttonClick, buttonIcon: ButtonIcon }) => {
 					{text}
 				</Typography>
 				<IconButton
-					variant="outlined"
 					color="warning"
 					onClick={buttonClick}
 				>

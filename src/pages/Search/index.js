@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+
+import { AuthContext } from "../../context/AuthContext";
 import { MenuBar } from "../../components";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Box, Button, Card, CardContent, Container, Grid, Stack, TextField, Typography } from "@mui/material";
@@ -8,6 +10,8 @@ import { Box, Button, Card, CardContent, Container, Grid, Stack, TextField, Typo
 const Search = () => {
     const history = useNavigate();
     const [searchText, setSearchText] = useState("");
+
+    const { user, logOut, isAuth } = useContext(AuthContext);
 
     // Almacenamos el input value:
     function searchInput(e) {
@@ -20,53 +24,54 @@ const Search = () => {
         history(`/search/${searchText}`)     
     }
 
-    function hola() {
-		console.log("HOLA");
+    function logoutButton() {
+		logOut()
+        history("/")
+	}
+    if (!isAuth()) {
+		return <Navigate to="/" />;
 	}
 
     return (
         <>
             <Box>
                 <MenuBar
-                    text={"Edgar"}
-                    buttonClick={hola}
+                    text={user.name}
+                    buttonClick={logoutButton}
                     buttonIcon={() => <LogoutIcon />}
                 />
             </Box>
             <Container maxWidth="sm">
-                <Card sx={{marginTop: 20}}>
-                    <CardContent>
-                        <Grid>
-                            <Box>
-                                <Stack sx={{textAlign: 'center'}}>
-                                    <Typography
-                                        
-                                        variant="h2"
-                                    >
-                                        OMDb Search
-                                    </Typography>
-                                </Stack>
-                            </Box>
-                            <Box>
-                                <Stack direction="row" spacing={1}>
-                                    <TextField
-                                        fullWidth
-                                        label="Movie or tv Show"
-                                        value={searchText}
-                                        onChange={searchInput}
-                                    />
-                                    <Button
-                                        fullWidth
-                                        variant="contained"
-                                        onClick={searchButton}
-                                    >
-                                        Search
-                                    </Button>
-                                </Stack>
-                            </Box>
-                        </Grid>
-                    </CardContent>
-                </Card>
+                <Grid container mt={6}>
+					<Grid item xs={12}>
+						<Card>
+							<CardContent>
+								<Typography variant="h2">
+									OMDB Search
+								</Typography>
+								<Stack
+									mt={2}
+									direction="row"
+									justifyContent="space-between"
+									spacing={2}
+								>
+									<TextField
+										label="Movie or tv show..."
+										fullWidth
+										onChange={searchInput}
+									/>
+									<Button
+										variant="contained"
+										fullWidth
+										onClick={searchButton}
+									>
+										Search
+									</Button>
+								</Stack>
+							</CardContent>
+						</Card>
+					</Grid>
+				</Grid>
             </Container>
         </>
     )
