@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import {
@@ -21,6 +21,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+
+import { AuthContext } from "../../context/AuthContext";
 
 const drawerWidth = 240;
 
@@ -90,6 +92,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const MainLayout = () => {
+  const { user, logOut } = useContext(AuthContext);
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -113,7 +116,7 @@ const MainLayout = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            {user.name}
           </Typography>
         </Toolbar>
       </AppBar>
