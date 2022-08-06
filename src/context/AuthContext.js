@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
         setUser({});
     }; 
     function isAuth() {
-        console.log(user);
         return user.name ? true : false;
     }
     return (

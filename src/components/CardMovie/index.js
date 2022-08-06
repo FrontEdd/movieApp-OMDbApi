@@ -1,3 +1,5 @@
+import { useContext, useState, useEffect } from "react";
+import { MovieFavContext } from "../../context";
 import {
   Card,
   CardContent,
@@ -12,6 +14,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const CardMovie = ({ movie }) => {
+    const { addToFavorite, isIncludeInFavorites } =
+    useContext(MovieFavContext);
+
+  // sirve para saber si debemos pintar el corazon
+    const [value, setValue] = useState(0);
+    
     const StyledRating = styled(Rating)({
         "& .MuiRating-iconFilled": {
           color: "#ff6d75",
@@ -20,11 +28,24 @@ const CardMovie = ({ movie }) => {
           color: "#ff3d47",
         },
       });
+
+      const handleChangeFavorite = (event, newValue) => {
+        if (newValue === 1) {
+          addToFavorite(movie.imdbID);
+        }
+        setValue(newValue);
+      };
+    
+      useEffect(() => {
+        const pintado = isIncludeInFavorites(movie.imdbID);
+        setValue(pintado);
+      }, []);
+    
 	return (
         <Grid item xs={12} md={4} my={3}>
             <Card
             sx={{
-                height: 400,
+                height: 430,
             }}
             >
                 <CardMedia
@@ -55,10 +76,15 @@ const CardMovie = ({ movie }) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
+                            {/* El corazon se pinta si es que value = 1 */}
                             <StyledRating
                                 max={1}
+                                value={value}
                                 icon={<FavoriteIcon fontSize="inherit" />}
                                 emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+                                onChange={(event, newValue) =>
+                                    handleChangeFavorite(event, newValue)
+                                }
                             />
                         </Grid>
                     </Grid>

@@ -14,7 +14,6 @@ const SearchResults = () => {
   async function getSearchResults() {
     const data = await Services.searchByText(searchText);
     setMovies(data.Search);
-    console.log(data.Search);
   }
 
   useEffect(() => {

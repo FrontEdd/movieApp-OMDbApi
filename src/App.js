@@ -1,4 +1,4 @@
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, MovieFavProvider } from "./context";
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme";
 import Router from "./router";
@@ -6,9 +6,11 @@ import Router from "./router";
 function App() {
 	return (
 		<AuthProvider>
-			<ThemeProvider theme={theme}>
-				<Router />
-			</ThemeProvider>
+			<MovieFavProvider>
+				<ThemeProvider theme={theme}>
+					<Router />
+				</ThemeProvider>
+			</MovieFavProvider>
 		</AuthProvider>
 	);
 }
