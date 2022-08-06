@@ -23,7 +23,7 @@ const SearchResults = () => {
   function backButton() {
     history("/search");
   }
-
+  
   return (
     <Box>
       <Container>
