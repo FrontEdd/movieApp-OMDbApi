@@ -1,27 +1,30 @@
 import { createContext, useState } from "react";
+import Config from "../config";
 
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const userStorage = JSON.parse(localStorage.getItem("movieapp.user")) || {};
-    const [user, setUser] = useState({userStorage});
     
-    function logIn(user, pass) {
-        if (user === "admin" && pass === "1234") {
-            const authUser = {
-                user: user,
-                name: "Edgar Razuri",
-            }
+    const userStorage = JSON.parse(localStorage.getItem("movieapp.user")) || {};
+    const [user, setUser] = useState(userStorage);
+    
+    function logIn(username, pass) {
+        const { authUsers } = Config;
+        const authUser = authUsers.find((user) => 
+            user.username === username && user.pass === pass
+        )
+        if (authUser !== undefined) {
             localStorage.setItem("movieapp.user", JSON.stringify(authUser));
-            setUser(authUser)
+            setUser(authUser);
             return true;
-        };
+        }
         return false;
     };
     function logOut() {
         localStorage.removeItem("movieapp.user");
-        setUser({});
+		setUser({});
+		window.location.href = "/";
     }; 
     function isAuth() {
         return user.name ? true : false;
