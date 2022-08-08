@@ -165,8 +165,8 @@ const MainLayout = () => {
 					{/* Favorite */}
 					<DrawerButton
 						icon={<FavoriteIcon />}
-						text="Favorite"
-						action={() => history("/favorite")}
+						text="Favorites"
+						action={() => history("/favorites")}
 					/>
 					{/* Logout */}
 					<DrawerButton

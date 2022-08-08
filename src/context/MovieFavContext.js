@@ -15,11 +15,6 @@ export const MovieFavProvider = ({ children }) => {
             created_favorited: new Date(),
             user_id: user.id,
         };
-        // if (favMovies.length === 0) {
-        //     setFavMovies([favMovies]);
-        //     saveInLocalStorage([favorite]);
-        //     return;
-        // }
 
         favMovies[favMovies.length] = favorite;
         setFavMovies(favMovies);
