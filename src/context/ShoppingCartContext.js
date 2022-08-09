@@ -4,7 +4,7 @@ export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
   const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("movieapp.shoppingcart") ?? [])
+    JSON.parse(localStorage.getItem("movieapp.shoppingcart")) ?? []
   );
 
   // que debemos guardar
