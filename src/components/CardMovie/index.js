@@ -75,6 +75,9 @@ const CardMovie = ({ movie }) => {
 							<Typography variant="body1">
 								{movie.Year}
 							</Typography>
+							<Typography color="#f01" variant="h6">
+								$ {movie.Price}
+							</Typography>
 							<Chip
 								label={movie.Type}
 								color="success"
