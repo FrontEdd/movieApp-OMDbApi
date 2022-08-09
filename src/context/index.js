@@ -4,3 +4,7 @@ export {
   MovieFavContext,
 } from "./MovieFavContext";
 
+export {
+  ShoppingCartContext,
+  ShoppingCartProvider
+} from "./ShoppingCartContext"
