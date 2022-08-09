@@ -8,10 +8,10 @@ function App() {
 		<AuthProvider>
 			<MovieFavProvider>
 				<ShoppingCartProvider>
-					<ThemeProvider theme={theme}>
-						<Router />
-					</ThemeProvider>
-				</ShoppingCartProvider>
+          <ThemeProvider theme={theme}>
+            <Router />
+          </ThemeProvider>
+        </ShoppingCartProvider>
 			</MovieFavProvider>
 		</AuthProvider>
 	);

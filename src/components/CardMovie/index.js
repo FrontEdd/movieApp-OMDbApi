@@ -1,5 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { MovieFavContext } from "../../context";
+import { 
+	AuthContext, 
+	MovieFavContext, 
+	ShoppingCartContext 
+} from "../../context";
 import {
 	Button,
 	Card,
@@ -16,8 +20,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const CardMovie = ({ movie }) => {
+	const { user } = useContext(AuthContext);
 	const { addToFavorite, isIncludeInFavorites, removeFavorite } =
 		useContext(MovieFavContext);
+	const { saveInCart } = useContext(ShoppingCartContext);
 
 	// sirve para saber si debemos pintar el corazon
 	const [value, setValue] = useState(0);
@@ -39,6 +45,10 @@ const CardMovie = ({ movie }) => {
 		}
 		setValue(newValue);
 	};
+
+	const addToCart = () => {
+		saveInCart(movie, user.id);
+	  };
 
 	useEffect(() => {
 		const pintado = isIncludeInFavorites(movie.imdbID);
@@ -89,7 +99,11 @@ const CardMovie = ({ movie }) => {
 						</Grid>
 						<Grid item xs={12}>
 							<Stack direction="row" justifyContent="space-between">
-								<Button variant="contained" size="small">
+								<Button 
+									variant="contained" 
+									size="small" 
+									onClick={addToCart}
+								>
 									Add to cart
 								</Button>
 								{/* El corazon se pinta si es que value = 1 */}

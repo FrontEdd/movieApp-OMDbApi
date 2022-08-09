@@ -18,13 +18,17 @@ export const ShoppingCartProvider = ({ children }) => {
       quantity: 1,
     };
 
+    //* estamos diciendo que object se guarde en items en la posicion 0
+    //* items[0] = object;
+    //* Entonces la segunda vez items.length = 1
+    //* items[1] = object;
     items[items.length] = object;
-    setItems(items);
+    setItems([...items]);
     saveInLocalStorage(items);
   }
 
   function saveInLocalStorage(items) {
-    localStorage.setItem("movieapp.shoppingcart", items);
+    localStorage.setItem("movieapp.shoppingcart", JSON.stringify(items));
   }
 
   return (
@@ -33,4 +37,3 @@ export const ShoppingCartProvider = ({ children }) => {
     </ShoppingCartContext.Provider>
   );
 };
-
